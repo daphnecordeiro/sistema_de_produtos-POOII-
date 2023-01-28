@@ -7,6 +7,8 @@ public class Administrador extends Pessoa implements VisualizarProdutos{
     
     public Administrador(String login, String senha) {
         super(login, senha);
+        setLogin("lol");
+        setSenha("123");
     }
 
     public Produto cadastrarProduto(){
