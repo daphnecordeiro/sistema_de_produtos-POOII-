@@ -14,6 +14,8 @@ public class Main {
         int opcao;
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("alteração daphne");
+
         Administrador adm = new Administrador("lol", "123");
         Cliente cli = new Cliente("abobora", "566");
 
