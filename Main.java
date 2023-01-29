@@ -21,115 +21,123 @@ public class Main {
         Cliente cliente = null;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("-------Menu inicial---------");
-        System.out.println("Digite 1 - sou adm");
-        System.out.println("Digite 2 - sou cliente");
-        opcaoMenuInicial = sc.nextInt();
-        if (opcaoMenuInicial == 1) {
-            System.out.print("Digite o login:");
-            loginAdm = sc.next();
-            System.out.print("Digite a senha:");
-            senhaAdm = sc.next();
-            Administrador administrador = new Administrador(loginAdm, senhaAdm);
-            if (ValidarUsuario.validaAdmLoginSenha(loginAdm, senhaAdm, administrador) == true) {
-                do {
-                    System.out.println("-----Menu Administrador ------: ");
-                    System.out.println("1 - Cadastrar produto");
-                    System.out.println("2 - Visualizar produtos");
-                    System.out.println("3 - Editar produto");
-                    System.out.println("4 - Remover produto");
-                    System.out.println("0 - Finalizar o programa");
+        do {
+            boolean continuando = true;
+            System.out.println("-------Menu Inicial---------");
+            System.out.println("Digite 1 - sou adm");
+            System.out.println("Digite 2 - sou cliente");
+            System.out.println("Digite 0 - Encerrar o Programa");
 
-                    System.out.println("Entre com a opção desejada: ");
-                    opcaoMenuAdm = sc.nextInt();
-                    switch (opcaoMenuAdm) {
-                        case 1:
-                            System.out.println("Digite o nome do produto: ");
-                            String nomeProduto = sc.next();
-                            System.out.println("Digite o preço do produto: ");
-                            double precoProduto = sc.nextDouble();
-                            System.out.println("Digite a marca: ");
-                            String marcaProduto = sc.next();
-                            System.out.println("Qual a categoria do produto(Mercado(m)/Livro(l)/Informática(i))");
-                            char ch = sc.next().charAt(0);
-                            if (ch == 'm') {
-                                Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.MERCADO);
-                                listaProdutos.add(produto);
-                                System.out.println("Produto adicionado: " + produto);
-                            } else if (ch == 'l') {
-                                Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.LIVRO);
-                                listaProdutos.add(produto);
-                                System.out.println("Produto adicionado: " + produto);
-                            } else if (ch == 'i') {
-                                Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.INFORMATICA);
-                                listaProdutos.add(produto);
-                                System.out.println("Produto adicionado: " + produto);
-                            }
-                            break;
-                        case 2:
-                            for (Produto produto : listaProdutos) {
-                                System.out.println(produto);
-                            }
-                            break;
-                        case 3:
-                            System.out.println("Digite o nome do produto que deseja editar: ");
-                            String nome = sc.next();
-                            for (Produto produto : listaProdutos) {
-                                if (produto.getNome().equals(nome)) {
-                                    System.out.println("Produto encontrado!");
+            opcaoMenuInicial = sc.nextInt();
+            if (opcaoMenuInicial == 1) {
+                System.out.print("Digite o login:");
+                loginAdm = sc.next();
+                System.out.print("Digite a senha:");
+                senhaAdm = sc.next();
+                Administrador administrador = new Administrador(loginAdm, senhaAdm);
+                boolean abreMenu = ValidarUsuario.validaAdmLoginSenha(loginAdm, senhaAdm, administrador) == true;
+                if (abreMenu) {
+                    do {
+                        System.out.println("-----Menu Administrador ------: ");
+                        System.out.println("1 - Cadastrar produto");
+                        System.out.println("2 - Visualizar produtos");
+                        System.out.println("3 - Editar produto");
+                        System.out.println("4 - Remover produto");
+                        System.out.println("0 - Retornar ao Menu Inicial");
+
+                        System.out.println("Entre com a opção desejada: ");
+                        opcaoMenuAdm = sc.nextInt();
+                        switch (opcaoMenuAdm) {
+                            case 0:
+                                System.out.println("Retornando ao Menu Inicial");
+                                break;
+                            case 1:
+                                System.out.println("Digite o nome do produto: ");
+                                String nomeProduto = sc.next();
+                                System.out.println("Digite o preço do produto: ");
+                                double precoProduto = sc.nextDouble();
+                                System.out.println("Digite a marca: ");
+                                String marcaProduto = sc.next();
+                                System.out.println("Qual a categoria do produto(Mercado(m)/Livro(l)/Informática(i))");
+                                char ch = sc.next().charAt(0);
+                                if (ch == 'm') {
+                                    Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.MERCADO);
+                                    listaProdutos.add(produto);
+                                    System.out.println("Produto adicionado: " + produto);
+                                } else if (ch == 'l') {
+                                    Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.LIVRO);
+                                    listaProdutos.add(produto);
+                                    System.out.println("Produto adicionado: " + produto);
+                                } else if (ch == 'i') {
+                                    Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.INFORMATICA);
+                                    listaProdutos.add(produto);
+                                    System.out.println("Produto adicionado: " + produto);
+                                }
+                                break;
+                            case 2:
+                                for (Produto produto : listaProdutos) {
                                     System.out.println(produto);
-                                    System.out.print("O que deseja editar?(Nome(n)/Preço(p)/Marca(m)/Categoria(c):");
-                                    char edicaoProduto = sc.next().charAt(0);
-                                    if (edicaoProduto == 'n') {
-                                        System.out.print("Digite o novo nome: ");
-                                        String novoNome = sc.next();
-                                        produto.setNome(novoNome);
-                                    }
-                                    if (edicaoProduto == 'p') {
-                                        System.out.print("Digite o novo preco: ");
-                                        double novoPreco = sc.nextDouble();
-                                        produto.setPreco(novoPreco);
-                                    }
-                                    if (edicaoProduto == 'm') {
-                                        System.out.print("Digite a nova marca: ");
-                                        String novaMarca = sc.next();
-                                        produto.setMarca(novaMarca);
-                                    }
-                                    if (edicaoProduto == 'c') {
-                                        System.out.print("Digite a nova categoria: (Mercado(m)/Livro(l)/Informática(i))");
-                                        ch = sc.next().charAt(0);
-                                        if (ch == 'm') {
-                                            produto.setCategoria(EnumCategoria.MERCADO);
-                                        } else if (ch == 'l') {
-                                            produto.setCategoria(EnumCategoria.LIVRO);
-                                        } else if (ch == 'i') {
-                                            produto.setCategoria(EnumCategoria.INFORMATICA);
+                                }
+                                break;
+                            case 3:
+                                System.out.println("Digite o nome do produto que deseja editar: ");
+                                String nome = sc.next();
+                                for (Produto produto : listaProdutos) {
+                                    if (produto.getNome().equals(nome)) {
+                                        System.out.println("Produto encontrado!");
+                                        System.out.println(produto);
+                                        System.out.print("O que deseja editar?(Nome(n)/Preço(p)/Marca(m)/Categoria(c):");
+                                        char edicaoProduto = sc.next().charAt(0);
+                                        if (edicaoProduto == 'n') {
+                                            System.out.print("Digite o novo nome: ");
+                                            String novoNome = sc.next();
+                                            produto.setNome(novoNome);
                                         }
+                                        if (edicaoProduto == 'p') {
+                                            System.out.print("Digite o novo preco: ");
+                                            double novoPreco = sc.nextDouble();
+                                            produto.setPreco(novoPreco);
+                                        }
+                                        if (edicaoProduto == 'm') {
+                                            System.out.print("Digite a nova marca: ");
+                                            String novaMarca = sc.next();
+                                            produto.setMarca(novaMarca);
+                                        }
+                                        if (edicaoProduto == 'c') {
+                                            System.out.print("Digite a nova categoria: (Mercado(m)/Livro(l)/Informática(i))");
+                                            ch = sc.next().charAt(0);
+                                            if (ch == 'm') {
+                                                produto.setCategoria(EnumCategoria.MERCADO);
+                                            } else if (ch == 'l') {
+                                                produto.setCategoria(EnumCategoria.LIVRO);
+                                            } else if (ch == 'i') {
+                                                produto.setCategoria(EnumCategoria.INFORMATICA);
+                                            }
+                                        }
+                                        break;
+                                    } else {
+                                        System.out.println("Produto não encontrado!");
                                     }
-                                    break;
-                                } else {
-                                    System.out.println("Produto não encontrado!");
+                                    System.out.println("Produto editado: " + produto);
                                 }
-                                System.out.println("Produto editado: " + produto);
-                            }
-                            break;
-                        case 4:
-                            System.out.println("Digite o nome do produto que deseja editar: ");
-                            String nomeProdutoRemocao = sc.next();
-                            for (Produto produto : listaProdutos) {
-                                if (produto.getNome().equals(nomeProdutoRemocao)) {
-                                    System.out.println(produto);
-                                    listaProdutos.remove(produto);
-                                    System.out.println("Produto encontrado e deletado!");
-                                } else {
-                                    System.out.println("Produto não encontrado!");
+                                break;
+                            case 4:
+                                System.out.println("Digite o nome do produto que deseja editar: ");
+                                String nomeProdutoRemocao = sc.next();
+                                for (Produto produto : listaProdutos) {
+                                    if (produto.getNome().equals(nomeProdutoRemocao)) {
+                                        System.out.println(produto);
+                                        listaProdutos.remove(produto);
+                                        System.out.println("Produto encontrado e deletado!");
+                                    } else {
+                                        System.out.println("Produto não encontrado!");
+                                    }
                                 }
-                            }
-                            break;
-                    }
-                } while (opcaoMenuAdm != 0);
-            }
-        }
+                                break;
+                        }
+                    } while (opcaoMenuAdm != 0);
+                }
+        /*
         if (opcaoMenuInicial == 2) {
             boolean continuar = true;
             do {
@@ -188,6 +196,8 @@ public class Main {
                     System.out.println("Obrigada e volte sempre");
                 }
             } while (continuar);
-        }
+        }*/
+            }
+        }while (opcaoMenuInicial != 0) ;
     }
 }
