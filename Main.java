@@ -1,15 +1,22 @@
 import java.net.CacheRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import Pojos.Administrador;
 import Pojos.Cliente;
+import Produtos.*;
 import Validador.ValidarUsuario;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        //Criar menu escolher perguntar tipo de usuário
+        //Criar menu escolher perguntar tipo de usuário\
+        List<Produto> listaProdutos = new ArrayList<>();
+        List<Livro> listaLivros = new ArrayList<>();
+        List<Informatica> listaInformatica = new ArrayList<>();
+        List<Mercado> listaMercado = new ArrayList<>();
 
 
         int opcao, opcaoMenuInicial, opcaoSubmenu, opcaoMenuAdm, opcaoMenuCliente;
@@ -40,7 +47,25 @@ public class Main {
                     opcaoMenuAdm = sc.nextInt();
                     switch (opcaoMenuAdm) {
                         case 1:
-                            System.out.println("Cadastrando produto");
+                            System.out.println("Digite o nome do produto: ");
+                            String nomeProduto = sc.next();
+                            System.out.println("Digite o preço do produto: ");
+                            double precoProduto = sc.nextDouble();
+                            System.out.println("Digite a marca: ");
+                            String marcaProduto = sc.next();
+                            System.out.println("Qual a categoria do produto(Mercado(m)/Livro(l)/Informática(i)");
+                            char ch = sc.next().charAt(0);
+                            if (ch == 'm') {
+                            Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto,new Categoria());
+                            listaProdutos.add(produto);
+                            listaMercado.add((Mercado) produto);
+                            } else if(ch == 'l') {
+                                Livro livro = new Livro(nomeProduto, precoProduto, marcaProduto, new Categoria());
+                                listaLivros.add(livro);
+                            }  else if (ch == 'i') {
+                        Informatica informatica = new Informatica(nomeProduto, precoProduto, marcaProduto, new Categoria());
+                        listaInformatica.add(informatica);
+                    }
                             break;
                         case 2:
                             System.out.println("Visualizando produto, etc");
@@ -48,73 +73,73 @@ public class Main {
                 } while (opcaoMenuAdm != 0);
             }
         }
-            if (opcaoMenuInicial == 2) {
-                do {
-                    System.out.println("Digite 1 - Cadastro cliente");
-                    System.out.println("Digite 2 - Login cliente");
-                    System.out.print("Digite 3 - Retorna ao Menu Inicial\n");// faz sentido essa opção?
-                    opcaoSubmenu = sc.nextInt();
-                    if (opcaoSubmenu == 1) {
-                        System.out.print("Digite o login a ser cadastrado:");
-                        loginCliente = sc.next();
-                        System.out.print("Digite a senha a ser cadastrada:");
-                        senhaCliente = sc.next();
-                        cliente = new Cliente(loginCliente, senhaCliente);
+        if (opcaoMenuInicial == 2) {
+            do {
+                System.out.println("Digite 1 - Cadastro cliente");
+                System.out.println("Digite 2 - Login cliente");
+                System.out.print("Digite 3 - Retorna ao Menu Inicial\n");// faz sentido essa opção?
+                opcaoSubmenu = sc.nextInt();
+                if (opcaoSubmenu == 1) {
+                    System.out.print("Digite o login a ser cadastrado:");
+                    loginCliente = sc.next();
+                    System.out.print("Digite a senha a ser cadastrada:");
+                    senhaCliente = sc.next();
+                    cliente = new Cliente(loginCliente, senhaCliente);
+                }
+                if (opcaoSubmenu == 2) {
+                    System.out.print("Digite o login:");
+                    loginCliente = sc.next();
+                    System.out.print("Digite a senha:");
+                    senhaCliente = sc.next();
+                    if (ValidarUsuario.validaClienteLoginSenha(loginCliente, senhaCliente, cliente) == true) {
+                        do {
+                            System.out.println("-----Menu Cliente (teste) ------: ");
+                            System.out.println("1 - Buscar produto");
+                            System.out.println("2 - Visualizar produto");
+                            System.out.println("3 - Editar produto");
+                            System.out.println("Entre com a opção desejada: ");
+                            System.out.println("0 - Sair do Menu");// aqui talvez a opção fosse sair do sistema
+                            opcaoMenuCliente = sc.nextInt();
+                            switch (opcaoMenuCliente) {
+                                case 1:
+                                    System.out.println("Buscando produto");
+                                    break;
+                                case 2:
+                                    System.out.println("Comparando produto, etc");
+                            }
+                        } while (opcaoMenuCliente != 0);
                     }
-                    if (opcaoSubmenu == 2) {
-                        System.out.print("Digite o login:");
-                        loginCliente = sc.next();
-                        System.out.print("Digite a senha:");
-                        senhaCliente = sc.next();
-                        if (ValidarUsuario.validaClienteLoginSenha(loginCliente, senhaCliente, cliente) == true) {
-                            do {
-                                System.out.println("-----Menu Cliente (teste) ------: ");
-                                System.out.println("1 - Buscar produto");
-                                System.out.println("2 - Visualizar produto");
-                                System.out.println("3 - Editar produto");
-                                System.out.println("Entre com a opção desejada: ");
-                                System.out.println("0 - Sair do Menu");// aqui talvez a opção fosse sair do sistema
-                                opcaoMenuCliente = sc.nextInt();
-                                switch (opcaoMenuCliente) {
-                                    case 1:
-                                        System.out.println("Buscando produto");
-                                        break;
-                                    case 2:
-                                        System.out.println("Comparando produto, etc");
-                                }
-                            } while (opcaoMenuCliente != 0);
-                        }
-                    }
-                } while (opcaoMenuInicial != 3);
+                }
+            } while (opcaoMenuInicial != 3);
 
 
-                Administrador adm = new Administrador("lol", "123");
-                Cliente cli = new Cliente("abobora", "566");
+            Administrador adm = new Administrador("lol", "123");
+            Cliente cli = new Cliente("abobora", "566");
 
-                ValidarUsuario.valida(adm);
+            ValidarUsuario.valida(adm);
 
-                // do{
-                //     System.out.println("Menu: ");
-                //     System.out.println("1 - Cadastrar usuário");
-                //     System.out.println("2 - Cadastrar produto");
-                //     System.out.println("3 - Visualizar produto");
-                //     System.out.println("4 - Editar produto");
-                //     System.out.println("5 - Remover produto");
-                //     System.out.println("0 - Sair");
-                //     System.out.println("Entre com a opção desejada: ");
-                //     opcao = sc.nextInt();
+            // do{
+            //     System.out.println("Menu: ");
+            //     System.out.println("1 - Cadastrar usuário");
+            //     System.out.println("2 - Cadastrar produto");
+            //     System.out.println("3 - Visualizar produto");
+            //     System.out.println("4 - Editar produto");
+            //     System.out.println("5 - Remover produto");
+            //     System.out.println("0 - Sair");
+            //     System.out.println("Entre com a opção desejada: ");
+            //     opcao = sc.nextInt();
 
-                //     switch (opcao){
+            //     switch (opcao){
 
-                //         case 1:
-                //         System.out.println("1");
-                //         break;
+            //         case 1:
+            //         System.out.println("1");
+            //         break;
 
-                //         case 2:
+            //         case 2:
 
-                //     }
+            //     }
 
-                // }while(opcao != 0);
-            }
+            // }while(opcao != 0);
         }
     }
+}

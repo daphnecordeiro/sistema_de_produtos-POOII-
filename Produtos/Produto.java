@@ -7,6 +7,13 @@ public class Produto {
     String marca;
     Categoria categoria;
 
+    public Produto(String nome, double preco, String marca, Categoria categoria) {
+        this.nome = nome;
+        this.preco = preco;
+        this.marca = marca;
+        this.categoria = categoria;
+    }
+
     public String getNome() {
         return this.nome;
     }
