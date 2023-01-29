@@ -13,15 +13,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //Criar menu escolher perguntar tipo de usuário\
         Locale.setDefault(Locale.US);
         List<Produto> listaProdutos = new ArrayList<>();
-        Mercado mercado = null;
-        Informatica informatica = null;
-        Livro livro = null;
-        System.out.println("alteração daphne");
 
-        int opcao, opcaoMenuInicial, opcaoSubmenu, opcaoMenuAdm, opcaoMenuCliente;
+        int opcaoMenuInicial, opcaoSubmenu, opcaoMenuAdm, opcaoMenuCliente;
         String loginAdm, senhaAdm, loginCliente, senhaCliente;
         Cliente cliente = null;
         Scanner sc = new Scanner(System.in);
@@ -79,29 +74,28 @@ public class Main {
                         case 3:
                             System.out.println("Digite o nome do produto que deseja editar: ");
                             String nome = sc.next();
-                            String edicao;
                             for (Produto produto : listaProdutos) {
                                 if (produto.getNome().equals(nome)) {
                                     System.out.println("Produto encontrado!");
                                     System.out.println(produto);
-                                    System.out.print("O que deseja editar? (nome, preco, marca, categoria): ");
-                                    edicao = sc.next();
-                                    if (edicao == "nome") {
+                                    System.out.print("O que deseja editar?(Nome(n)/Preço(p)/Marca(m)/Categoria(c):");
+                                    char edicaoProduto = sc.next().charAt(0);
+                                    if (edicaoProduto == 'n') {
                                         System.out.print("Digite o novo nome: ");
                                         String novoNome = sc.next();
                                         produto.setNome(novoNome);
                                     }
-                                    if (edicao == "preco") {
+                                    if (edicaoProduto == 'p') {
                                         System.out.print("Digite o novo preco: ");
                                         double novoPreco = sc.nextDouble();
                                         produto.setPreco(novoPreco);
                                     }
-                                    if (edicao == "marca") {
+                                    if (edicaoProduto == 'm') {
                                         System.out.print("Digite a nova marca: ");
                                         String novaMarca = sc.next();
-                                        produto.setNome(novaMarca);
+                                        produto.setMarca(novaMarca);
                                     }
-                                    if (edicao == "categoria") {
+                                    if (edicaoProduto == 'c') {
                                         System.out.print("Digite a nova categoria: (Mercado(m)/Livro(l)/Informática(i))");
                                         ch = sc.next().charAt(0);
                                         if (ch == 'm') {
@@ -119,8 +113,21 @@ public class Main {
                                 System.out.println("Produto editado: " + produto);
                             }
                             break;
+                        case 4:
+                            System.out.println("Digite o nome do produto que deseja editar: ");
+                            String nomeProdutoRemocao = sc.next();
+                            for (Produto produto : listaProdutos) {
+                                if (produto.getNome().equals(nomeProdutoRemocao)) {
+                                    System.out.println(produto);
+                                    listaProdutos.remove(produto);
+                                    System.out.println("Produto encontrado e deletado!");
+                                } else {
+                                    System.out.println("Produto não encontrado!");
+                                }
+                            }
+                            break;
                     }
-                } while (opcaoMenuAdm !=0);
+                } while (opcaoMenuAdm != 0);
             }
         }
         if (opcaoMenuInicial == 2) {
@@ -146,20 +153,24 @@ public class Main {
                     senhaCliente = sc.next();
                     if (ValidarUsuario.validaClienteLoginSenha(loginCliente, senhaCliente, cliente) == true) {
                         do {
-                            System.out.println("-----Menu Cliente (teste) ------: ");
-                            System.out.println("1 - Buscar produto");
-                            System.out.println("2 - Visualizar produto");
-                            System.out.println("3 - Editar produto");
+                            System.out.println("-----Menu Cliente ------: ");
+                            System.out.println("1 - Visualizar lista de produtos");
+                            System.out.println("2 - Filtrar por categoria");
+                            System.out.println("3 - Filtrar por marca");
+                            System.out.println("4 - Ordenar por nome(ordem crescente e descrescente)");
+                            System.out.println("5 - Ordenar por preço(ordem crescente e descrescente)");
                             System.out.println("0 - Finalizar o programa");
 
                             System.out.println("Entre com a opção desejada: ");
                             opcaoMenuCliente = sc.nextInt();
                             switch (opcaoMenuCliente) {
                                 case 1:
-                                    System.out.println("Buscando produto");
+                                    for(Produto produto: listaProdutos){
+                                        System.out.println(produto);
+                                    }
                                     break;
                                 case 2:
-                                    System.out.println("Vizualizar produtos");
+                                    System.out.println("Filtrar pela categoria: (m)mercado/(l)livro/(i) informática");
                                     break;
                                 case 3:
                                     System.out.println("Editando Produtos");
