@@ -55,7 +55,7 @@ public class Main {
                             double precoProduto = sc.nextDouble();
                             System.out.println("Digite a marca: ");
                             String marcaProduto = sc.next();
-                            System.out.println("Qual a categoria do produto(Mercado(m)/Livro(l)/Informática(i)");
+                            System.out.println("Qual a categoria do produto(Mercado(m)/Livro(l)/Informática(i))");
                             char ch = sc.next().charAt(0);
                             if (ch == 'm') {
                                 Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.MERCADO);
@@ -81,6 +81,48 @@ public class Main {
                             case 3:
                             System.out.println("Digite o nome do produto que deseja editar: ");
                             String nome = sc.next();
+                            String edicao;
+                            for(Produto produto : listaProdutos){
+                                if(produto.getNome().equals(nome)){
+                                    System.out.println("Produto encontrado!");
+                                    System.out.println(produto);
+                                    System.out.print("O que deseja editar? (nome, preco, marca, categoria): ");
+                                    edicao = sc.next();
+                                    if(edicao == "nome"){
+                                        System.out.print("Digite o novo nome: ");
+                                        String novoNome = sc.next();
+                                        produto.setNome(novoNome);
+                                    }
+                                    if(edicao == "preco"){
+                                        System.out.print("Digite o novo preco: ");
+                                        double novoPreco = sc.nextDouble();
+                                        produto.setPreco(novoPreco);
+                                    }
+                                    if(edicao == "marca"){
+                                        System.out.print("Digite a nova marca: ");
+                                        String novaMarca = sc.next();
+                                        produto.setNome(novaMarca);
+                                    }
+                                    if(edicao == "categoria"){
+                                        System.out.print("Digite a nova categoria: (Mercado(m)/Livro(l)/Informática(i))");
+                                            ch = sc.next().charAt(0);
+                                            if (ch == 'm') {
+                                                produto.setCategoria(EnumCategoria.MERCADO);
+                                            } 
+                                            else if(ch == 'l') {
+                                                produto.setCategoria(EnumCategoria.LIVRO);
+                                            }  
+                                            else if (ch == 'i') {
+                                                produto.setCategoria(EnumCategoria.INFORMATICA);
+                                            }
+                                    }
+                                    break;
+                                }
+                                else{
+                                    System.out.println("Produto não encontrado!");
+                                }
+                                System.out.println("Produto editado: " + produto);
+                            }
                             break;
                     }
                 } while (opcaoMenuAdm != 0);
