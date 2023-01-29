@@ -19,7 +19,7 @@ public class Main {
         Mercado mercado = null;
         Informatica informatica = null;
         Livro livro = null;
-
+        System.out.println("alteração daphne");
 
         int opcao, opcaoMenuInicial, opcaoSubmenu, opcaoMenuAdm, opcaoMenuCliente;
         String loginAdm, senhaAdm, loginCliente, senhaCliente;
