@@ -90,7 +90,8 @@ public class Main {
             do {
                 System.out.println("Digite 1 - Cadastro cliente");
                 System.out.println("Digite 2 - Login cliente");
-                System.out.print("Digite 3 - Retorna ao Menu Inicial\n");// faz sentido essa opção?
+                System.out.println("Digite 3 - Finalizar o sistema");
+
                 opcaoSubmenu = sc.nextInt();
                 if (opcaoSubmenu == 1) {
                     System.out.print("Digite o login a ser cadastrado:");
@@ -110,8 +111,8 @@ public class Main {
                             System.out.println("1 - Buscar produto");
                             System.out.println("2 - Visualizar produto");
                             System.out.println("3 - Editar produto");
+                            System.out.println("0 - Finalizar o programa");
                             System.out.println("Entre com a opção desejada: ");
-                            System.out.println("0 - Sair do Menu");// aqui talvez a opção fosse sair do sistema
                             opcaoMenuCliente = sc.nextInt();
                             switch (opcaoMenuCliente) {
                                 case 1:
@@ -120,10 +121,10 @@ public class Main {
                                 case 2:
                                     System.out.println("Comparando produto, etc");
                             }
-                        } while (opcaoMenuCliente != 0);
+                        } while (opcaoMenuCliente !=0);
                     }
                 }
-            } while (opcaoMenuInicial != 3);
+            } while (opcaoMenuInicial!=3);
 
         }
     }
