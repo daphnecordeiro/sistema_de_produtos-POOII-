@@ -1,7 +1,9 @@
 package Produtos;
 
+import Enums.EnumCategoria;
+
 public class Mercado extends Produto {
-    public Mercado(String nome, double preco, String marca, Categoria categoria) {
+    public Mercado(String nome, double preco, String marca, EnumCategoria categoria) {
         super(nome, preco, marca, categoria);
     }
 

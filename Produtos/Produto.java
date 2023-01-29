@@ -1,13 +1,15 @@
 package Produtos;
 
+import Enums.EnumCategoria;
+
 public class Produto {
     
-    String nome;
-    double preco;
-    String marca;
-    Categoria categoria;
+    protected String nome;
+    protected double preco;
+    protected String marca;
+    protected EnumCategoria categoria;
 
-    public Produto(String nome, double preco, String marca, Categoria categoria) {
+    public Produto(String nome, double preco, String marca, EnumCategoria categoria) {
         this.nome = nome;
         this.preco = preco;
         this.marca = marca;
@@ -38,11 +40,11 @@ public class Produto {
         this.marca = marca;
     }
 
-    public Categoria getCategoria() {
+    public EnumCategoria getCategoria() {
         return this.categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(EnumCategoria categoria) {
         this.categoria = categoria;
     }
 

@@ -2,9 +2,10 @@ package Produtos;
 
 public class Categoria {
 
-    private static String livro;
-    private static String informatica;
-    private static String mercado;
+    private static String categoria;
+    private String livro;
+    private String informatica;
+    private String mercado;
 
     public Categoria(String livro, String informatica, String mercado) {
         this.livro = livro;
@@ -12,28 +13,38 @@ public class Categoria {
         this.mercado = mercado;
     }
 
-    public static String getLivro() {
-        return livro;
+    public String getLivro() {
+        return this.livro;
     }
 
-    public static void setLivro(String livro) {
-        Categoria.livro = livro;
+    public void setLivro(String livro) {
+        this.livro = livro;
     }
 
-    public static String getInformatica() {
-        return informatica;
+    public String getInformatica() {
+        return this.informatica;
     }
 
-    public static void setInformatica(String informatica) {
-        Categoria.informatica = informatica;
+    public void setInformatica(String informatica) {
+        this.informatica = informatica;
     }
 
-    public static String getMercado() {
-        return mercado;
+    public String getMercado() {
+        return this.mercado;
     }
 
-    public static void setMercado(String mercado) {
-        Categoria.mercado = mercado;
+    public void setMercado(String mercado) {
+        this.mercado = mercado;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " livro='" + getLivro() + "'" +
+            ", informatica='" + getInformatica() + "'" +
+            ", mercado='" + getMercado() + "'" +
+            "}";
+    }
+
 }
 

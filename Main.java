@@ -1,9 +1,9 @@
-import java.net.CacheRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import Enums.EnumCategoria;
 import Pojos.Administrador;
 import Pojos.Cliente;
 import Produtos.*;
@@ -14,10 +14,8 @@ public class Main {
     public static void main(String[] args) {
 
         //Criar menu escolher perguntar tipo de usuário\
+        Locale.setDefault(Locale.US);
         List<Produto> listaProdutos = new ArrayList<>();
-        List<Livro> listaLivros = new ArrayList<>();
-        List<Informatica> listaInformatica = new ArrayList<>();
-        List<Mercado> listaMercado = new ArrayList<>();
         Mercado mercado =null;
         Informatica informatica =null;
         Livro livro= null;
@@ -26,9 +24,7 @@ public class Main {
         int opcao, opcaoMenuInicial, opcaoSubmenu, opcaoMenuAdm, opcaoMenuCliente;
         String loginAdm, senhaAdm, loginCliente, senhaCliente;
         Cliente cliente = null;
-        Categoria categoria;
         Scanner sc = new Scanner(System.in);
-        Locale.setDefault(Locale.US);
 
         System.out.println("-------Menu inicial---------");
         System.out.println("Digite 1 - sou adm");// Considera que o adm já possui conta e não precisa fazer cadastro
@@ -44,7 +40,7 @@ public class Main {
                 do {
                     System.out.println("-----Menu Administrador ------: ");
                     System.out.println("1 - Cadastrar produto");
-                    System.out.println("2 - Visualizar produto");
+                    System.out.println("2 - Visualizar produtos");
                     System.out.println("3 - Editar produto");
                     System.out.println("4 - Remover produto");
                     System.out.println("0 - Finalizar o programa");
@@ -62,24 +58,30 @@ public class Main {
                             System.out.println("Qual a categoria do produto(Mercado(m)/Livro(l)/Informática(i)");
                             char ch = sc.next().charAt(0);
                             if (ch == 'm') {
-                            Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto,new Categoria(null, null, "mercado"));
-                            listaProdutos.add(produto);
-                            listaMercado.add((Mercado) produto);
-                                System.out.println(listaMercado);
+                                Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.MERCADO);
+                                listaProdutos.add(produto);
                                 System.out.println("Produto adicionado: "+ produto);
-                            } else if(ch == 'l') {
-                                //Livro livro = new Livro(nomeProduto, precoProduto, marcaProduto, new Categoria());
-                                listaLivros.add(livro);
-                            }  else if (ch == 'i') {
-                        //Informatica informatica = new Informatica(nomeProduto, precoProduto, marcaProduto, new Categoria());
-                        listaInformatica.add(informatica);
-                    }
+                            } 
+                            else if(ch == 'l') {
+                                Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.LIVRO);
+                                listaProdutos.add(produto);
+                                System.out.println("Produto adicionado: "+ produto);
+                            }  
+                            else if (ch == 'i') {
+                                Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto, EnumCategoria.INFORMATICA);
+                                listaProdutos.add(produto);
+                                System.out.println("Produto adicionado: "+ produto);
+                            }
                             break;
-                        case 2:
-                            System.out.println("Visualizando produto, etc");
-
-
-
+                            case 2:
+                            for(Produto produto : listaProdutos){
+                                System.out.println(produto);
+                            }
+                            break;
+                            case 3:
+                            System.out.println("Digite o nome do produto que deseja editar: ");
+                            String nome = sc.next();
+                            break;
                     }
                 } while (opcaoMenuAdm != 0);
             }
@@ -123,34 +125,6 @@ public class Main {
                 }
             } while (opcaoMenuInicial != 3);
 
-
-            Administrador adm = new Administrador("lol", "123");
-            Cliente cli = new Cliente("abobora", "566");
-
-            ValidarUsuario.valida(adm);
-
-            // do{
-            //     System.out.println("Menu: ");
-            //     System.out.println("1 - Cadastrar usuário");
-            //     System.out.println("2 - Cadastrar produto");
-            //     System.out.println("3 - Visualizar produto");
-            //     System.out.println("4 - Editar produto");
-            //     System.out.println("5 - Remover produto");
-            //     System.out.println("0 - Sair");
-            //     System.out.println("Entre com a opção desejada: ");
-            //     opcao = sc.nextInt();
-
-            //     switch (opcao){
-
-            //         case 1:
-            //         System.out.println("1");
-            //         break;
-
-            //         case 2:
-
-            //     }
-
-            // }while(opcao != 0);
         }
     }
 }
