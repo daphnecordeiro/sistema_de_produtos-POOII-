@@ -1,6 +1,7 @@
 import java.net.CacheRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import Pojos.Administrador;
@@ -17,12 +18,17 @@ public class Main {
         List<Livro> listaLivros = new ArrayList<>();
         List<Informatica> listaInformatica = new ArrayList<>();
         List<Mercado> listaMercado = new ArrayList<>();
+        Mercado mercado =null;
+        Informatica informatica =null;
+        Livro livro= null;
 
 
         int opcao, opcaoMenuInicial, opcaoSubmenu, opcaoMenuAdm, opcaoMenuCliente;
         String loginAdm, senhaAdm, loginCliente, senhaCliente;
         Cliente cliente = null;
+        Categoria categoria;
         Scanner sc = new Scanner(System.in);
+        Locale.setDefault(Locale.US);
 
         System.out.println("-------Menu inicial---------");
         System.out.println("Digite 1 - sou adm");// Considera que o adm já possui conta e não precisa fazer cadastro
@@ -56,19 +62,24 @@ public class Main {
                             System.out.println("Qual a categoria do produto(Mercado(m)/Livro(l)/Informática(i)");
                             char ch = sc.next().charAt(0);
                             if (ch == 'm') {
-                            Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto,new Categoria());
+                            Produto produto = new Produto(nomeProduto, precoProduto, marcaProduto,new Categoria(null, null, "mercado"));
                             listaProdutos.add(produto);
                             listaMercado.add((Mercado) produto);
+                                System.out.println(listaMercado);
+                                System.out.println("Produto adicionado: "+ produto);
                             } else if(ch == 'l') {
-                                Livro livro = new Livro(nomeProduto, precoProduto, marcaProduto, new Categoria());
+                                //Livro livro = new Livro(nomeProduto, precoProduto, marcaProduto, new Categoria());
                                 listaLivros.add(livro);
                             }  else if (ch == 'i') {
-                        Informatica informatica = new Informatica(nomeProduto, precoProduto, marcaProduto, new Categoria());
+                        //Informatica informatica = new Informatica(nomeProduto, precoProduto, marcaProduto, new Categoria());
                         listaInformatica.add(informatica);
                     }
                             break;
                         case 2:
                             System.out.println("Visualizando produto, etc");
+
+
+
                     }
                 } while (opcaoMenuAdm != 0);
             }

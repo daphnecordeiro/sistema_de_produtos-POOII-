@@ -1,34 +1,39 @@
 package Produtos;
 
 public class Categoria {
-    
-    private Livro livro;
-    private Informatica informatica;
-    private Mercado mercado;
 
-    public Livro getLivro() {
-        return this.livro;
-    }
+    private static String livro;
+    private static String informatica;
+    private static String mercado;
 
-    public void setLivro(Livro livro) {
+    public Categoria(String livro, String informatica, String mercado) {
         this.livro = livro;
-    }
-
-    public Informatica getInformatica() {
-        return this.informatica;
-    }
-
-    public void setInformatica(Informatica informatica) {
         this.informatica = informatica;
-    }
-
-    public Mercado getMercado() {
-        return this.mercado;
-    }
-
-    public void setMercado(Mercado mercado) {
         this.mercado = mercado;
     }
 
+    public static String getLivro() {
+        return livro;
+    }
+
+    public static void setLivro(String livro) {
+        Categoria.livro = livro;
+    }
+
+    public static String getInformatica() {
+        return informatica;
+    }
+
+    public static void setInformatica(String informatica) {
+        Categoria.informatica = informatica;
+    }
+
+    public static String getMercado() {
+        return mercado;
+    }
+
+    public static void setMercado(String mercado) {
+        Categoria.mercado = mercado;
+    }
 }
 
