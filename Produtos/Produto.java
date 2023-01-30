@@ -2,8 +2,8 @@ package Produtos;
 
 import Enums.EnumCategoria;
 
-public class Produto {
-    
+public class Produto implements Comparable<Produto> {
+
     protected String nome;
     protected double preco;
     protected String marca;
@@ -57,5 +57,11 @@ public class Produto {
                 ", categoria=" + categoria +
                 '}';
     }
+
+    @Override
+    public int compareTo(Produto o) {
+        return this.getNome().compareTo(o.getNome());
+    }
 }
+
 

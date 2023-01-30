@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
+import Comparador.ComparadorProdutoPorPreco;
 import Enums.EnumCategoria;
 import Pojos.Administrador;
 import Pojos.Cliente;
@@ -220,7 +218,35 @@ public class Main {
                                             }
                                         break;
                                     case 4:
-
+                                        System.out.println("Ordenar a lista por nome na ordem crescente ou descrescente?(c/d)");
+                                        char opcaoOrdemNome = sc.next().charAt(0);
+                                        if(opcaoOrdemNome=='c'){
+                                            Collections.sort(listaProdutos);
+                                            for(Produto produto:listaProdutos){
+                                                System.out.println(produto);
+                                            }
+                                        } if(opcaoOrdemNome=='d') {
+                                        Collections.reverse(listaProdutos);
+                                        for (Produto produto : listaProdutos) {
+                                            System.out.println(produto);
+                                        }
+                                    }
+                                        break;
+                                    case 5:
+                                        System.out.println("Ordenar a lista por preço na ordem crescente ou descrescente?(c/d)");
+                                        char opcaoOrdemPreco = sc.next().charAt(0);
+                                        if(opcaoOrdemPreco=='c'){
+                                            ComparadorProdutoPorPreco comparadorProdutoPorPreco = new ComparadorProdutoPorPreco();
+                                            Collections.sort(listaProdutos, comparadorProdutoPorPreco);
+                                            for(Produto produto:listaProdutos){
+                                                System.out.println(produto);
+                                            }
+                                        } if(opcaoOrdemPreco=='d') {
+                                        Collections.reverse(listaProdutos);
+                                        for (Produto produto : listaProdutos) {
+                                            System.out.println(produto);
+                                        }
+                                    }
                                         break;
                                 }
                             } while (opcaoMenuCliente != 0);
