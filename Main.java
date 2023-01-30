@@ -24,19 +24,21 @@ public class Main {
         do {
             boolean continuando = true;
             System.out.println("-------Menu Inicial---------");
-            System.out.println("Digite 1 - sou adm");
-            System.out.println("Digite 2 - sou cliente");
-            System.out.println("Digite 0 - Encerrar o Programa");
+            System.out.println("Digite 1 - Sou Administrador");
+            System.out.println("Digite 2 - Sou Cliente");
+            System.out.println("Digite 0 - Finalizar o Sistema");
 
             opcaoMenuInicial = sc.nextInt();
+
             if (opcaoMenuInicial == 1) {
+                System.out.println("-------Login Administrador---------");
                 System.out.print("Digite o login:");
                 loginAdm = sc.next();
                 System.out.print("Digite a senha:");
                 senhaAdm = sc.next();
                 Administrador administrador = new Administrador(loginAdm, senhaAdm);
-                boolean abreMenu = ValidarUsuario.validaAdmLoginSenha(loginAdm, senhaAdm, administrador) == true;
-                if (abreMenu) {
+                boolean abreMenuAdm = ValidarUsuario.validaAdmLoginSenha(loginAdm, senhaAdm, administrador) == true;
+                if (abreMenuAdm) {
                     do {
                         System.out.println("-----Menu Administrador ------: ");
                         System.out.println("1 - Cadastrar produto");
@@ -137,67 +139,95 @@ public class Main {
                         }
                     } while (opcaoMenuAdm != 0);
                 }
-        /*
-        if (opcaoMenuInicial == 2) {
-            boolean continuar = true;
-            do {
-                System.out.println("Digite 1 - Cadastro cliente");
-                System.out.println("Digite 2 - Login cliente");
-                System.out.println("Digite 3 - Finalizar o sistema");
-
-                opcaoSubmenu = sc.nextInt();
-                if (opcaoSubmenu == 1) {
-
-                    System.out.print("Digite o login a ser cadastrado:");
-                    loginCliente = sc.next();
-                    System.out.print("Digite a senha a ser cadastrada:");
-                    senhaCliente = sc.next();
-                    cliente = new Cliente(loginCliente, senhaCliente);
-                }
-                if (opcaoSubmenu == 2) {
-                    System.out.print("Digite o login:");
-                    loginCliente = sc.next();
-                    System.out.print("Digite a senha:");
-                    senhaCliente = sc.next();
-                    if (ValidarUsuario.validaClienteLoginSenha(loginCliente, senhaCliente, cliente) == true) {
-                        do {
-                            System.out.println("-----Menu Cliente ------: ");
-                            System.out.println("1 - Visualizar lista de produtos");
-                            System.out.println("2 - Filtrar por categoria");
-                            System.out.println("3 - Filtrar por marca");
-                            System.out.println("4 - Ordenar por nome(ordem crescente e descrescente)");
-                            System.out.println("5 - Ordenar por preço(ordem crescente e descrescente)");
-                            System.out.println("0 - Finalizar o programa");
-
-                            System.out.println("Entre com a opção desejada: ");
-                            opcaoMenuCliente = sc.nextInt();
-                            switch (opcaoMenuCliente) {
-                                case 1:
-                                    for(Produto produto: listaProdutos){
-                                        System.out.println(produto);
-                                    }
-                                    break;
-                                case 2:
-                                    System.out.println("Filtrar pela categoria: (m)mercado/(l)livro/(i) informática");
-                                    break;
-                                case 3:
-                                    System.out.println("Editando Produtos");
-                                    break;
-                                case 0:
-                                    continuar = false;
-                                    System.out.println("Obrigado E Volte Sempre");
-                                    break;
-                            }
-                        } while (continuar);
-                    }
-                }
-                if (opcaoSubmenu == 3) {
-                    continuar = false;
-                    System.out.println("Obrigada e volte sempre");
-                }
-            } while (continuar);
-        }*/
             }
-        }while (opcaoMenuInicial != 0) ;
+            if (opcaoMenuInicial == 2) {
+                do {
+                    System.out.println("----- Menu Cliente(Cadastro/Login)------");
+                    System.out.println("Digite 1 - Cadastro cliente (Primeiro Acesso)");
+                    System.out.println("Digite 2 - Login cliente");
+                    System.out.println("Digite 3 - Retornar ao Menu Inicial");
+
+                    opcaoSubmenu = sc.nextInt();
+                    if (opcaoSubmenu == 1) {
+                        System.out.println("-------Cadastro Cliente---------");
+                        System.out.print("Digite o login a ser cadastrado:");
+                        loginCliente = sc.next();
+                        System.out.print("Digite a senha a ser cadastrada:");
+                        senhaCliente = sc.next();
+                        cliente = new Cliente(loginCliente, senhaCliente);
+                        System.out.print("Cadastro realizado com sucesso! Faça o seu login para acesso ao Menu. \n");
+                    }
+                    if (opcaoSubmenu == 2) {
+                        System.out.println("-------Login Cliente---------");
+                        System.out.print("Digite o login:");
+                        loginCliente = sc.next();
+                        System.out.print("Digite a senha:");
+                        senhaCliente = sc.next();
+                        boolean abreMenuCliente = ValidarUsuario.validaClienteLoginSenha(loginCliente, senhaCliente, cliente) == true;
+                        if (abreMenuCliente) {
+                            do {
+                                System.out.println("-------Menu Cliente ------: ");
+                                System.out.println("1 - Visualizar lista de produtos");
+                                System.out.println("2 - Filtrar por categoria");
+                                System.out.println("3 - Filtrar por marca");
+                                System.out.println("4 - Ordenar por nome(ordem crescente e descrescente)");
+                                System.out.println("5 - Ordenar por preço(ordem crescente e descrescente)");
+                                System.out.println("0 - Sair do Menu Cliente");
+
+                                System.out.println("Entre com a opção desejada: ");
+                                opcaoMenuCliente = sc.nextInt();
+                                switch (opcaoMenuCliente) {
+                                    case 0:
+                                        System.out.println("Saindo do Menu Cliente");
+                                        break;
+                                    case 1:
+                                        for (Produto produto : listaProdutos) {
+                                            System.out.println(produto);
+                                        }
+                                        break;
+                                    case 2:
+                                        System.out.println("Filtrar pela categoria: (m)Mercado/(l)Livro/(i)Informática");
+                                        char opcaoFiltroPorCategoria = sc.next().charAt(0);
+                                        if (opcaoFiltroPorCategoria == 'm') {
+                                            for (Produto produto : listaProdutos) {
+                                                if (produto.getCategoria().equals(EnumCategoria.MERCADO)) {
+                                                    System.out.println(produto);
+                                                }
+                                            }
+                                        }
+                                        if (opcaoFiltroPorCategoria == 'l') {
+                                            for (Produto produto : listaProdutos) {
+                                                if (produto.getCategoria().equals(EnumCategoria.LIVRO)) {
+                                                    System.out.println(produto);
+                                                }
+                                            }
+                                        }
+                                        if (opcaoFiltroPorCategoria == 'i') {
+                                            for (Produto produto : listaProdutos) {
+                                                if (produto.getCategoria().equals(EnumCategoria.INFORMATICA)) {
+                                                    System.out.println(produto);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case 3:
+                                        System.out.println("Digite a marca:");
+                                        String opcaoFiltrarPorMarca = sc.next();
+                                            for (Produto produto : listaProdutos) {
+                                                if (produto.getMarca().equals(opcaoFiltrarPorMarca)) {
+                                                    System.out.println(produto);
+                                                }
+                                            }
+                                        break;
+                                    case 4:
+
+                                        break;
+                                }
+                            } while (opcaoMenuCliente != 0);
+                        }
+                    }
+                } while (opcaoSubmenu != 3);
+            }
+        } while (opcaoMenuInicial != 0);
     }
 }

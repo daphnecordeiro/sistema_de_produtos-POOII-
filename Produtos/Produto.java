@@ -17,7 +17,7 @@ public class Produto {
     }
 
     public String getNome() {
-        return this.nome;
+        return nome;
     }
 
     public void setNome(String nome) {
@@ -25,7 +25,7 @@ public class Produto {
     }
 
     public double getPreco() {
-        return this.preco;
+        return preco;
     }
 
     public void setPreco(double preco) {
@@ -33,7 +33,7 @@ public class Produto {
     }
 
     public String getMarca() {
-        return this.marca;
+        return marca;
     }
 
     public void setMarca(String marca) {
@@ -41,7 +41,7 @@ public class Produto {
     }
 
     public EnumCategoria getCategoria() {
-        return this.categoria;
+        return categoria;
     }
 
     public void setCategoria(EnumCategoria categoria) {
