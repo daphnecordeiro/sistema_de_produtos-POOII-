@@ -2,10 +2,12 @@ package Produtos;
 
 import Enums.EnumCategoria;
 
-public class Produto implements Comparable<Produto> {
+import java.util.Comparator;
+
+public class Produto implements Comparable<Produto>{
 
     protected String nome;
-    protected double preco;
+    protected Double preco;
     protected String marca;
     protected EnumCategoria categoria;
 
@@ -24,11 +26,11 @@ public class Produto implements Comparable<Produto> {
         this.nome = nome;
     }
 
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
@@ -49,6 +51,10 @@ public class Produto implements Comparable<Produto> {
     }
 
     @Override
+    public int compareTo(Produto o) {
+        return this.getNome().compareTo(o.getNome());
+    }
+    @Override
     public String toString() {
         return "Produto{" +
                 "nome='" + nome + '\'' +
@@ -56,11 +62,6 @@ public class Produto implements Comparable<Produto> {
                 ", marca='" + marca + '\'' +
                 ", categoria=" + categoria +
                 '}';
-    }
-
-    @Override
-    public int compareTo(Produto o) {
-        return this.getNome().compareTo(o.getNome());
     }
 }
 

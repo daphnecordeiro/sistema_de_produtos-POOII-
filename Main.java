@@ -1,6 +1,5 @@
 import java.util.*;
 
-import Comparador.ComparadorProdutoPorPreco;
 import Enums.EnumCategoria;
 import Pojos.Administrador;
 import Pojos.Cliente;
@@ -55,7 +54,7 @@ public class Main {
                                 System.out.println("Digite o nome do produto: ");
                                 String nomeProduto = sc.next();
                                 System.out.println("Digite o preço do produto: ");
-                                double precoProduto = sc.nextDouble();
+                                Double precoProduto = sc.nextDouble();
                                 System.out.println("Digite a marca: ");
                                 String marcaProduto = sc.next();
                                 System.out.println("Qual a categoria do produto(Mercado(m)/Livro(l)/Informática(i))");
@@ -95,7 +94,7 @@ public class Main {
                                         }
                                         if (edicaoProduto == 'p') {
                                             System.out.print("Digite o novo preco: ");
-                                            double novoPreco = sc.nextDouble();
+                                            Double novoPreco = sc.nextDouble();
                                             produto.setPreco(novoPreco);
                                         }
                                         if (edicaoProduto == 'm') {
@@ -211,37 +210,37 @@ public class Main {
                                     case 3:
                                         System.out.println("Digite a marca:");
                                         String opcaoFiltrarPorMarca = sc.next();
-                                            for (Produto produto : listaProdutos) {
-                                                if (produto.getMarca().equals(opcaoFiltrarPorMarca)) {
-                                                    System.out.println(produto);
-                                                }
+                                        for (Produto produto : listaProdutos) {
+                                            if (produto.getMarca().equals(opcaoFiltrarPorMarca)) {
+                                                System.out.println(produto);
                                             }
+                                        }
                                         break;
                                     case 4:
                                         System.out.println("Ordenar a lista por nome na ordem crescente ou descrescente?(c/d)");
                                         char opcaoOrdemNome = sc.next().charAt(0);
-                                        if(opcaoOrdemNome=='c'){
+                                        if (opcaoOrdemNome == 'c') {
                                             Collections.sort(listaProdutos);
-                                            for(Produto produto:listaProdutos){
+                                            for (Produto produto : listaProdutos) {
                                                 System.out.println(produto);
                                             }
-                                        } if(opcaoOrdemNome=='d') {
-                                        Collections.reverse(listaProdutos);
-                                        for (Produto produto : listaProdutos) {
-                                            System.out.println(produto);
                                         }
-                                    }
+                                        if (opcaoOrdemNome == 'd') {
+                                            Collections.reverse(listaProdutos);
+                                            for (Produto produto : listaProdutos) {
+                                                System.out.println(produto);
+                                            }
+                                        }
                                         break;
                                     case 5:
                                         System.out.println("Ordenar a lista por preço na ordem crescente ou descrescente?(c/d)");
                                         char opcaoOrdemPreco = sc.next().charAt(0);
-                                        if(opcaoOrdemPreco=='c'){
-                                            ComparadorProdutoPorPreco comparadorProdutoPorPreco = new ComparadorProdutoPorPreco();
-                                            Collections.sort(listaProdutos, comparadorProdutoPorPreco);
-                                            for(Produto produto:listaProdutos){
+                                        if (opcaoOrdemPreco == 'c') {
+                                            Collections.sort(listaProdutos, Comparator.comparing(Produto::getPreco));
+                                            for (Produto produto : listaProdutos) {
                                                 System.out.println(produto);
                                             }
-                                        } if(opcaoOrdemPreco=='d') {
+                                        } if (opcaoOrdemPreco == 'd') {
                                         Collections.reverse(listaProdutos);
                                         for (Produto produto : listaProdutos) {
                                             System.out.println(produto);
